@@ -2,7 +2,7 @@
 This is a little script to make the basic daily operations faster in personal computer with the tool - AutoHotKey.</br>
 </br>
 To run this, please first download the software autohotkey from the official website:</br>
-https://autohotkey.com/
+https://autohotkey.com/</br>
 Then run it by double clicking this script.</br>
 </br>
 In case you have good ideas about the script, or have any questions, please don't hesitate to contact me via:</br>
@@ -23,4 +23,4 @@ Right Click -> Edit this script.</br>
 Right Click -> reload the script, then it should be working.</br>
 </br>
 --- current hotkeys ---</br>
-to be continued...
+to be continued...</br>
