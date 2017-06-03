@@ -5,27 +5,14 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 SetTitleMatchMode RegEx
 
-;//////////////////////  5. Write signature  /////////////////////////////////
+;//////////////////////  1. Write signature  /////////////////////////////////
 ;// Windows + e
 #e::
 send Kindly regards,`nPerry`n
-;//Clipboard = Kindly regards,`r`nPerry Xu`r`nDe-Escalation Architect`r`nMCC Production Support`r`nDigital Business Service`r`nSAP China`r`n
-;//Send, {CtrlDown}v{CtrlUp}
 return
 
-;// Windows + w
-#w::
-ClipSaved := ClipboardAll
-clipboard = Kindly regards,`r`nPerry Xu`r`nDe-Escalation Architect`r`nMCC Production Support`r`nDigital Business Service`r`nSAP China`r`n
-Send, {CtrlDown}v{CtrlUp}
-sleep, 10
-clipboard := ClipSaved
-ClipSaved = 
-return
-
-
-;//////////////////////  7. Open software  /////////////////////////////////
-;// alt + 1 -- open new notepad and copy the text in it
+;//////////////////////  2. Copy in notepad  /////////////////////////////////
+;// alt + 1 -- open new notepad and copy the full text in new notepad (can be used to remove the format)
 !1::
 winset, AlwaysOnTop
 ClipSaved := ClipboardAll
@@ -42,20 +29,40 @@ Clipboard := ClipSaved
 ClipSaved = 
 return
 
+;//////////////////////  3. Open Google translator  /////////////////////////////////
 ;// alt + 2 -- open google translater
 !2::
-run, chrome.exe http://translate.google.cn/
+winset, AlwaysOnTop
+ClipSaved := ClipboardAll
+Send, {CtrlDown}c{CtrlUp}
+Sleep, 100
+target := clipboard
+
+StringReplace,target,target,`r`n, ,A
+StringReplace,target,target,`r,,A
+StringReplace,target,target,`n,,A
+StringReplace,target,target,%A_SPACE%,`%20,A
+
+url_translate = http://translate.google.cn/#en/zh-CN/%target%
+run, chrome.exe %url_translate%
 return 
 
+;//////////////////////  4. Open snipping tool to get screenshot  /////////////////////////////////
 ;// alt + 3 -- open snipping tool
 !3::
 run, C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Accessories\Snipping Tool
-sleep, 200
+sleep, 500
 send {CtrlDown}PrtScn{CtrlUp}
 return 
 
+;//////////////////////  5. Open CMD  /////////////////////////////////
+;// alt + 4 -- open CMD with desktop
+!4::
+run, cmd
+sleep, 100
+return 
 
-;//////////////////////  8. open Baidu+google  /////////////////////////////////
+;//////////////////////  6. open Baidu to search the selected String  /////////////////////////////////
 ;// Windows + b - baidu search
 #b::
 winset, AlwaysOnTop
@@ -80,6 +87,7 @@ sleep, 100
 ClipSaved = 
 return
 
+;//////////////////////  7. open Baidu to search the selected String  /////////////////////////////////
 ;// Windows + g - google search
 #g::
 winset, AlwaysOnTop
@@ -104,12 +112,14 @@ sleep, 100
 ClipSaved = 
 return
 
-;//////////////////////  hotstrings  /////////////////////////////////
+
+;//////////////////////  PS: hotstrings  /////////////////////////////////
 ;not need to end with endchars:
 ;:*:btw::By the way, 
 ;need to end with endchars:
 ;::px::Kind regards,`nPerry Xu
 
+;//////////////////////  PS: Open the Script Help page for AutoHotKey  /////////////////////////////////
 #h::
 run, chrome.exe https://autohotkey.com/docs/Tutorial.htm#s2
 return 
