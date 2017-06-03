@@ -5,6 +5,13 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 SetTitleMatchMode RegEx
 
+;////////////////////////////////////////
+;// Script Name: EasyHotKey            //
+;// Version: 1.1                       //
+;// Update date: 2017.06.03 (UTC+8)    //
+;// Author: Perry Xu (xupubit@163.com) //
+;////////////////////////////////////////
+
 ;//////////////////////  1. Write signature  /////////////////////////////////
 ;// Windows + e
 #e::
